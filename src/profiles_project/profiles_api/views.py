@@ -6,14 +6,14 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from . import serializers
-
+from . import models
 
 # Create your views here.
 
 class HelloApiView(APIView):
     """Test API View."""
 
-    serializers_class = serializers.HelloSerializer
+    serializer_class = serializers.HelloSerializer
 
     def get(self, request, format=None):
         """Returns a list of APIview features."""
@@ -60,7 +60,7 @@ class HelloApiView(APIView):
 class HelloViewSet(viewsets.ViewSet):
     """Test API ViewSet."""
 
-    serializers_class = serializers.HelloSerializer
+    serializer_class = serializers.HelloSerializer
 
     def list(self, request):
         
@@ -108,4 +108,10 @@ class HelloViewSet(viewsets.ViewSet):
 
         return Response({'http_method': 'DELETE'})
 
-        
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    """Handles creating, creating and updating profiles."""
+
+    serializer_class = serializers.UserProfileSerializer
+    queryset = models.UserProfile.objects.all()
+
